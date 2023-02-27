@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Conversation Inference</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Ciphix Conversation Inference</h1>
+        <form action="/infer" method="POST">
+            <label for="input_text">Enter your conversation:</label>
+            <input type="text" name="input_text" id="input_text" required>
+            <input type="submit" value="Infer">
+        </form>
+        {% if image_path %}
+            <div class="container">
+                <img src="{{ image_path }}" style="max-width: 100%">
+                <p>Condidence: {{ confidence }}</p>
+            </div>
+            
+        {% endif %}
+    </div>
+</body>
+</html>
+
+
+
