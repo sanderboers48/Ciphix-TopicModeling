@@ -6,6 +6,19 @@ import re
 
 app = Flask(__name__)
 
+# Load Natural Languuege processing model
+nlp = spacy.load("en_core_web_sm", disable = ["parser", "ner"])
+stopwords = nlp.Defaults.stop_words
+stopwords.update(["hi", "hello", "hey", "et"])
+allowed_postags = ["NOUN", "ADJ", "VERB", "ADV"]
+
+# Load Phrases models
+bigram_mod = gensim.models.Phrases.load("./saved_models/bigram_mod.pkl")
+trigram_mod = gensim.models.Phrases.load("./saved_models/trigram_mod.pkl")
+
+# Load saved LDA model
+lda_model = LdaModel.load('./saved_models/LDAmodel')
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -65,18 +78,5 @@ def apply_lemmatization(doc):
 
 
 if __name__ == '__main__':
-    # Load Natural Languuege processing model
-    nlp = spacy.load("en_core_web_sm", disable = ["parser", "ner"])
-    stopwords = nlp.Defaults.stop_words
-    stopwords.update(["hi", "hello", "hey", "et"])
-    allowed_postags = ["NOUN", "ADJ", "VERB", "ADV"]
-
-    # Load Phrases models
-    bigram_mod = gensim.models.Phrases.load("./saved_models/bigram_mod.pkl")
-    trigram_mod = gensim.models.Phrases.load("./saved_models/trigram_mod.pkl")
-
-    # Load saved LDA model
-    lda_model = LdaModel.load('./saved_models/LDAmodel')
-
-
     app.run(debug=True)
+    
