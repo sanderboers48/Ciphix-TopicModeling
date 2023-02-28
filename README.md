@@ -36,6 +36,8 @@ pip install -r requirements_trainingmodel.txt
 The webapp is also hosted on a free-tier of the Google Cloud services using App Engine. This site can be visited on:
 
 http://ciphix-ml-case.ew.r.appspot.com
+NOTE: I just found out that the app uses too much memory for inference task, so it now crashes all the time :(
+Only works locally...
 
 
 ## Explantions
